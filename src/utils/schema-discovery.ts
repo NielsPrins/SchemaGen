@@ -1,5 +1,5 @@
 import { readdirSync, statSync } from "node:fs";
-import { basename, resolve } from "node:path";
+import { basename, resolve, dirname } from "node:path";
 import { generateText, Output } from "ai";
 import { z } from "zod";
 
@@ -35,7 +35,15 @@ export class SchemaDiscovery extends OpenAiProvider {
 
       loader.succeed();
 
-      return output.files;
+      return output.files.map((file) => {
+        const rootName = basename(path);
+
+        if (file === rootName || file.startsWith(`${rootName}/`)) {
+          return resolve(dirname(path), file);
+        }
+
+        return resolve(path, file);
+      });
     } catch (e) {
       loader.fail();
       throw new Error("Failed to lookup files", { cause: e });

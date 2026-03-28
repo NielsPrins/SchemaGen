@@ -22,7 +22,7 @@ export class SchemaGen {
   }
 
   async start(): Promise<void> {
-    console.log(chalk.cyan("--- ", chalk.yellow.bgBlue("SchemaGen") + " ---"));
+    console.log(chalk.cyan("--- ", chalk.white(chalk.bgGreen("SchemaGen")) + " ---"));
     console.log(chalk.cyan("Starting schema generation..."));
 
     const schemaDiscovery = new SchemaDiscovery(this.config.openAiKey);
