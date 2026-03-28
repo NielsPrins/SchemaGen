@@ -1,5 +1,7 @@
 # SchemaGen
 
+[Npm Package](https://www.npmjs.com/package/erd-schema-gen/)
+
 SchemaGen is a TypeScript CLI that turns schema source files into a diagram using OpenAI and PlantUML.
 
 It is aimed at database-schema-heavy codebases. The CLI scans a target directory, finds the files that actually define the schema, generates valid PlantUML, and then either:
@@ -7,7 +9,21 @@ It is aimed at database-schema-heavy codebases. The CLI scans a target directory
 - saves a rendered `svg` or `png`
 - opens the generated diagram in the PlantUML web editor
 
-![Example ERD](./ERD_diagram.svg)
+![Example ERD](https://raw.githubusercontent.com/NielsPrins/SchemaGen/main/ERD_diagram.svg)
+
+## Installation
+
+Install the package via npm:
+
+```
+    npm install erd-schema-gen
+```
+
+Run the generator using:
+
+```
+node node_modules/.bin/schemagen
+```
 
 ## Features
 
@@ -25,28 +41,6 @@ It is aimed at database-schema-heavy codebases. The CLI scans a target directory
 - Internet access to `www.plantuml.com` for rendered image output
 - A desktop environment if you want the CLI to auto-open the result
 
-## Installation
-
-### Run from source
-
-```bash
-pnpm install
-pnpm build
-```
-
-Then run the CLI directly:
-
-```bash
-node dist/index.js --dir examples/prisma
-```
-
-### Optional: link the CLI globally
-
-```bash
-pnpm link --global
-schemagen --dir examples/prisma
-```
-
 ## Configuration
 
 SchemaGen reads the API key from either:
@@ -58,37 +52,6 @@ Example:
 
 ```bash
 OPEN_AI_KEY=sk-...
-```
-
-The environment variable name is `OPEN_AI_KEY`.
-
-## Quick Start
-
-Generate a diagram from the bundled Drizzle example:
-
-```bash
-pnpm build
-node dist/index.js --dir examples/drizzle-orm
-```
-
-By default this will:
-
-- scan `examples/drizzle-orm`
-- discover the schema files
-- generate PlantUML
-- download `ERD_diagram.svg` into the current working directory
-- open the generated file with your default app
-
-## Usage
-
-```bash
-schemagen [options]
-```
-
-If you are running from the repository instead of a global install:
-
-```bash
-node dist/index.js [options]
 ```
 
 ### Options
@@ -112,25 +75,25 @@ node dist/index.js [options]
 Generate an SVG from the Prisma example:
 
 ```bash
-node dist/index.js --dir examples/prisma
+node node_modules/.bin/schemagen --dir examples/prisma
 ```
 
 Generate a PNG into a custom directory:
 
 ```bash
-node dist/index.js --dir examples/drizzle-orm --output diagrams --type png
+node node_modules/.bin/schemagen --dir examples/drizzle-orm --output diagrams --type png
 ```
 
 Write to an explicit file path:
 
 ```bash
-node dist/index.js --dir examples/drizzle-orm --output diagrams/schema.svg
+node node_modules/.bin/schemagen --dir examples/drizzle-orm --output diagrams/schema.svg
 ```
 
 Open the PlantUML editor instead of downloading a file:
 
 ```bash
-node dist/index.js --dir examples/drizzle-orm --editor
+node node_modules/.bin/schemagen --dir examples/drizzle-orm --editor
 ```
 
 ## How It Works
