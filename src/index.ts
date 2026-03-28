@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 import chalk from "chalk";
 import { PlantUmlFormatType, plantUmlFormatTypes } from "./lib/definitions";
 
+console.clear();
+
 const program = new Command();
 
 program
@@ -12,11 +14,11 @@ program
   .version("0.1.0");
 
 program
-  .command("gen")
-  .option("--open-ai-key", "Your OpenAI API key")
-  .option("--dir", "Modify the directory (default: current working directory)", "examples/drizzle-orm")
-  .option("--output", "The path to the output directory")
-  .option("--type", "Either 'svg' or 'png' (default: svg)", "svg")
+  .option("--open-ai-key <string>", "Your OpenAI API key")
+  .option("--dir <string>", "Modify the directory (default: current working directory)")
+  .option("--output <string>", "The path to the output directory")
+  .option("--type <string>", "Either 'svg' or 'png' (default: svg)", "svg")
+  .option("--editor", "Open the generated diagram in the web editor")
   .action((args) => {
     let openAiKey: string | undefined = args["open-ai-key"];
     let directory: string | undefined = args["dir"];
@@ -38,13 +40,19 @@ program
     if (!openAiKey) {
       console.log(chalk.red("OpenAI API key is required"));
       console.log(chalk.red("Either use the --open-ai-key argument"));
-      console.log(chalk.red("Or set the OPEN_AI_KEY environment variable in a .env file"));
+      console.log(
+        chalk.red("Or set the OPEN_AI_KEY environment variable in a .env file"),
+      );
       process.exit(1);
     }
 
     if (!plantUmlFormatTypes.includes(fileType as PlantUmlFormatType)) {
       const supportedTypesString = plantUmlFormatTypes.join(", ");
-      console.log(chalk.red(`Invalid file type: ${fileType}. Supported types are: ${supportedTypesString}`));
+      console.log(
+        chalk.red(
+          `Invalid file type: ${fileType}. Supported types are: ${supportedTypesString}`,
+        ),
+      );
       process.exit(1);
     }
 
@@ -53,6 +61,7 @@ program
       directory: directory,
       outputDirectory: outputDirectory,
       fileType: fileType as PlantUmlFormatType,
+      editor: args.editor,
     });
 
     schemaGen.start();
