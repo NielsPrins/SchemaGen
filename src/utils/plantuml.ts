@@ -1,7 +1,7 @@
-import { OpenAiProvider } from "../lib/open-api-port";
-import { generateText, stepCountIs } from "ai";
+import {OpenAiProvider} from "../lib/open-api-port";
+import {generateText, stepCountIs} from "ai";
 import ora from "ora";
-import { readPlantUmlDocsTool } from "../tools/read-docs";
+import {readPlantUmlDocsTool} from "../tools/read-docs";
 
 export class PlantUML extends OpenAiProvider {
   constructor(openApiKey: string) {
@@ -21,7 +21,7 @@ export class PlantUML extends OpenAiProvider {
       system: `
 You generate valid PlantUML markup only.
 
-You MUST call read_docs first and verify the correct syntax from ./docs/*.md before writing the diagram. Never guess PlantUML syntax.
+You MUST call read_docs first and verify the correct syntax before writing the diagram. Never guess PlantUML syntax.
 
 Rules:
 - Return only PlantUML markup
@@ -35,7 +35,7 @@ Rules:
       prompt: `
 You are given source content from a codebase. Your task is to generate a valid PlantUML diagram based on that content.
 
-Before generating anything, you MUST call \`read_docs\` and use the documentation in \`./docs/*.md\` to verify the correct PlantUML syntax. Do not rely on memory. Do not guess syntax.
+Before generating anything, you MUST call \`read_docs\` to verify the correct PlantUML syntax. Do not rely on memory. Do not guess syntax.
 
 Goal:
 Generate exactly one valid PlantUML diagram in plain text.

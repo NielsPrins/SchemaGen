@@ -6,7 +6,7 @@
   "type": "commonjs",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "tsc && tsx src/index.ts --dir examples/drizzle-orm",
+    "dev": "tsc && tsx src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js"
   },

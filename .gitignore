@@ -5,3 +5,4 @@ dist/
 .env*
 .npm-cache/
 examples/
+ERD_diagram.svg

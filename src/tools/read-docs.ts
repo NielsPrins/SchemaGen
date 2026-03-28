@@ -1,15 +1,16 @@
-import { generateText, tool, stepCountIs } from "ai";
-import { z } from "zod";
+import {tool} from "ai";
+import {z} from "zod";
 
 export const readPlantUmlDocsTool = tool({
   description:
     "Reads PlantUML documentation to verify correct syntax for diagram types",
   inputSchema: z.object({}),
   execute: async ({}) => {
+
     const { readdir, readFile } = await import("node:fs/promises");
     const path = await import("node:path");
 
-    const docsDirectory = path.resolve(__dirname, "../../docs");
+    const docsDirectory = path.resolve(__dirname, "../../assets/docs");
     const markdownFiles = (await readdir(docsDirectory))
       .filter((fileName) => fileName.endsWith(".md"))
       .sort();

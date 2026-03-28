@@ -29,7 +29,7 @@ node node_modules/.bin/schemagen
 
 - Automatically discovers schema-defining files instead of requiring a manual file list
 - Works well with the Prisma and Drizzle examples included in this repo
-- Generates PlantUML using the local docs in [`docs/`](./docs) as a syntax reference
+- Generates PlantUML using the local docs in [`docs/`](assets/docs) as a syntax reference
 - Supports `svg` and `png` output
 - Can open either the rendered file or the PlantUML editor automatically
 
@@ -101,7 +101,7 @@ node node_modules/.bin/schemagen --dir examples/drizzle-orm --editor
 1. Builds a simplified tree of the target directory and skips noisy folders such as `node_modules`, `.git`, `.idea`, `.vscode`, `dist`, `build`, `out`, and `logs`.
 2. Uses `gpt-5.4-nano` to identify which files directly define the schema.
 3. Reads those files and asks `gpt-5.4-nano` to produce valid PlantUML.
-4. Uses the markdown docs in [`docs/`](./docs) to verify PlantUML syntax before generating the diagram.
+4. Uses the markdown docs in [`docs/`](assets/docs) to verify PlantUML syntax before generating the diagram.
 5. Either opens the PlantUML editor or renders the final diagram through PlantUML and saves it locally.
 
 ## What It Works Well With
@@ -130,7 +130,7 @@ pnpm start -- --dir examples/prisma
 Notes:
 
 - `pnpm dev` compiles the project and runs the CLI against `examples/drizzle-orm` with `--editor`.
-- The PlantUML reference material used by the generator lives in [`docs/`](./docs).
+- The PlantUML reference material used by the generator lives in [`docs/`](assets/docs).
 
 ## Publish to npm
 

@@ -1,0 +1,146 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="514px" preserveAspectRatio="none"
+     style="width:674px;height:514px;background:#FFFFFF;" version="1.1" viewBox="0 0 674 514" width="674px"
+     zoomAndPan="magnify"><?plantuml 1.2026.3beta6?>
+    <defs/>
+    <g><!--class user-->
+        <g class="entity" data-qualified-name="user" data-source-line="4" id="ent0002">
+            <rect fill="#F1F1F1" height="123.7813" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;"
+                  width="425.0957" x="7" y="7"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30.5361"
+                  x="204.2798" y="24.9951">user
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="431.0957" y1="33.2969" y2="33.2969"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="431.0957" y1="41.2969" y2="41.2969"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.5918"
+                  x="13" y="58.292">+id : varchar(10) &#171;PK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135.584"
+                  x="13" y="74.5889">name : varchar(50)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175.499"
+                  x="13" y="90.8857">email : varchar(50) &#171;UK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="162.5928"
+                  x="13" y="107.1826">password : varchar(60)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="413.0957"
+                  x="13" y="123.4795">permission_group : enum('customer','admin') = 'customer'
+            </text>
+        </g><!--class order-->
+        <g class="entity" data-qualified-name="order" data-source-line="12" id="ent0003">
+            <rect fill="#F1F1F1" height="107.4844" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;"
+                  width="421.3496" x="8.87" y="215.93"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="37.5771"
+                  x="200.7562" y="233.9251">order
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="9.87" x2="429.2196" y1="242.2269" y2="242.2269"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="108.3838"
+                  x="14.87" y="259.222">date : datetime
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="9.87" x2="429.2196" y1="266.5238" y2="266.5238"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.5918"
+                  x="14.87" y="283.5189">+id : varchar(10) &#171;PK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="409.3496"
+                  x="14.87" y="299.8157">status : enum('received','shipped','delivered') = 'received'
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="185.0078"
+                  x="14.87" y="316.1126">user_id : varchar(10) &#171;FK&#187;
+            </text>
+        </g><!--class product-->
+        <g class="entity" data-qualified-name="product" data-source-line="19" id="ent0004">
+            <rect fill="#F1F1F1" height="123.7813" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;"
+                  width="194.6289" x="465.23" y="207.78"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="54.1543"
+                  x="535.4673" y="225.7751">product
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="466.23" x2="658.8589" y1="234.0769" y2="234.0769"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="85.1006"
+                  x="471.23" y="251.072">image : text
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="466.23" x2="658.8589" y1="258.3738" y2="258.3738"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="159.5918"
+                  x="471.23" y="275.3689">+id : varchar(10) &#171;PK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="123.252"
+                  x="471.23" y="291.6657">title : varchar(50)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="182.6289"
+                  x="471.23" y="307.9626">description : varchar(300)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="129.3633"
+                  x="471.23" y="324.2595">price : double(7,2)
+            </text>
+        </g><!--class order_line-->
+        <g class="entity" data-qualified-name="order_line" data-source-line="27" id="ent0005">
+            <rect fill="#F1F1F1" height="91.1875" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;"
+                  width="254.4297" x="263.33" y="408.56"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="69.8428"
+                  x="355.6235" y="426.5551">order_line
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="264.33" x2="516.7597" y1="434.8569" y2="434.8569"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="264.33" x2="516.7597" y1="442.8569" y2="442.8569"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="225.8525"
+                  x="269.33" y="459.852">+order_id : varchar(10) &#171;PK,FK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="242.4297"
+                  x="269.33" y="476.1489">+product_id : varchar(10) &#171;PK,FK&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="110.0654"
+                  x="269.33" y="492.4457">quantity : int(3)
+            </text>
+        </g><!--link user to order-->
+        <g class="link" data-entity-1="ent0002" data-entity-2="ent0003" data-link-type="dependency"
+           data-source-line="33" id="lnk6">
+            <path codeLine="33" d="M219.55,131.15 C219.55,158.19 219.55,183.66 219.55,209.67" fill="none"
+                  id="user-to-order" style="stroke:#181818;stroke-width:1;"/>
+            <polygon fill="#181818" points="219.55,215.67,223.55,206.67,219.55,210.67,215.55,206.67,219.55,215.67"
+                     style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22.9785"
+                  x="220.55" y="173.8469">has
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8.271"
+                  x="211.1276" y="150.8541">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23.0356"
+                  x="195.0795" y="204.8654">0..*
+            </text>
+        </g><!--link order to order_line-->
+        <g class="link" data-entity-1="ent0003" data-entity-2="ent0005" data-link-type="dependency"
+           data-source-line="34" id="lnk7">
+            <path codeLine="34" d="M269.01,323.45 C294.16,350.3 320.3079,378.1913 344.3279,403.8313" fill="none"
+                  id="order-to-order_line" style="stroke:#181818;stroke-width:1;"/>
+            <polygon fill="#181818"
+                     points="348.43,408.21,345.1961,398.9072,345.0116,404.5611,339.3578,404.3766,348.43,408.21"
+                     style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="55.0278"
+                  x="321.55" y="374.6269">contains
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8.271"
+                  x="266.8526" y="343.3766">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23.0356"
+                  x="317.5579" y="397.4371">0..*
+            </text>
+        </g><!--link product to order_line-->
+        <g class="link" data-entity-1="ent0004" data-entity-2="ent0005" data-link-type="dependency"
+           data-source-line="35" id="lnk8">
+            <path codeLine="35" d="M504.8,331.94 C481.28,356.9 458.6954,380.8538 437.0354,403.8338" fill="none"
+                  id="product-to-order_line" style="stroke:#181818;stroke-width:1;"/>
+            <polygon fill="#181818"
+                     points="432.92,408.2,442.0039,404.3943,436.3495,404.5615,436.1823,398.9071,432.92,408.2"
+                     style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="70.9033"
+                  x="477.55" y="374.6269">appears_in
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8.271"
+                  x="490.0615" y="351.6452">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="23.0356"
+                  x="414.4574" y="397.4256">0..*
+            </text>
+        </g>
+        <?plantuml-src XLBBJiCm4BpdArQv9A4FfI10gaebBfKG5oJ4ETewgsP5x0G_oalyEuvJsW9LU_9uTzOp7hlYaa2m5ZL5vfbLYnebY1gDkRLMyz9PkXEDUkGFWZoAGWTYPqZ7W0Ow09yHm81BcC8QjQXGfvCyWzdiuNu-zos5alPwbtdcYoIHwzzLF_7KJxHUvBNH-oTUXQcMj6HZk575IZUkzGHIJgQ9SCOsadGoJB2Kh98CRc1NZRwsrlsn6-y1dJ9lB5fdjZgQ1F6QIgzZAcxRW4ggVKrx75It73zUektktYsM9VbAbrXnG6_HwUrijhefdR31w0QVichPrl-3Bia8pQtrcUtrBlBGP8chRiJIc-tYrIo2tSOjQqglX-VPt-IAcXNjuWlRtbY_FsXlkEWT3ZOtESvwSQZyNTuzXPLDBuA7yD7YIGoZqHpYV3m-YpSFE8KAJTJZGuJUuXJyBxR8oaG_SHuZetzQrAPWzGq0?>
+    </g>
+</svg>
