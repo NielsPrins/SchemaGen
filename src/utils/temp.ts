@@ -1,10 +1,12 @@
 import { SchemaDiscovery } from "./schema-discovery";
+import 'dotenv/config'
 
-export function main() {
-  const files = SchemaDiscovery.discover(
+export async function main() {
+  const files = await SchemaDiscovery.discover(
     process.env.OPEN_AI_KEY ?? '',
-    "./examples/prisma/schema.prisma",
   );
+
+  console.log(files);
 }
 
 main()

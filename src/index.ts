@@ -13,14 +13,20 @@ program
 program
   .command("gen")
   .option("--open-ai-key", "Your OpenAI API key")
+  .option("--dir", "Modify the directory (default: current working directory)")
   .option("--output", "The path to the output directory")
   .action((args) => {
 
-    let outputDir: string | undefined = args['output'];
     let openAiKey: string | undefined = args["open-ai-key"];
+    let directory: string | undefined = args['dir'];
+    let outputDirectory: string | undefined = args['output'];
 
-    if (!outputDir){
-      outputDir = process.cwd();
+    if (!directory) {
+      directory = process.cwd();
+    }
+
+    if (!outputDirectory){
+      outputDirectory = process.cwd();
     }
 
     if (!openAiKey) {
@@ -36,8 +42,9 @@ program
     }
 
     const schemaGen = new SchemaGen({
-      workingDirectory: outputDir,
       openAiKey: openAiKey,
+      directory: directory,
+      outputDirectory: outputDirectory,
     });
 
     schemaGen.start();

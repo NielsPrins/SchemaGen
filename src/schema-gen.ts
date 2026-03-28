@@ -1,22 +1,27 @@
 import plantumlEncoder from "plantuml-encoder";
 import { ParsePlantUml } from "./utils/parse-plant-uml";
 import chalk from "chalk";
+import ora from "ora";
+import { SchemaDiscovery } from "./utils/schema-discovery";
 
 interface SchemaGenConfig {
-  workingDirectory: string;
   openAiKey: string;
+  directory: string;
+  outputDirectory: string;
 }
 
 export class SchemaGen {
 
-  private readonly workingDirectory: string;
+  private readonly config: SchemaGenConfig;
 
   constructor(config: SchemaGenConfig) {
-    this.workingDirectory = config.workingDirectory;
+    this.config = config;
   }
 
   start() {
-    console.log("Starting schema generation...");
+    console.log(chalk.cyan("Starting schema generation..."));
+
+    const schemaDiscovery = new SchemaDiscovery();
 
     // Search repo with OpenAI (PrismaJs, TypeORM, Laravel Eloquent or XML files.)
     // read the docs for information on propper PlantUML syntax
@@ -28,9 +33,9 @@ export class SchemaGen {
     // @TODO fill with plantUml
     const somePlantUml = "A -> B: Hello";
 
-    const parsePlantUml = new ParsePlantUml(somePlantUml, this.workingDirectory);
-    const pngPath = parsePlantUml.saveAsPng();
-    console.log(chalk.green(`Saved as PNG: ${pngPath}`));
+    const parsePlantUml = new ParsePlantUml(somePlantUml, this.config.outputDirectory);
+    const svgPath = parsePlantUml.saveAsSvg();
+    console.log(chalk.green(`Saved as SVG: ${svgPath}`));
   }
 }
 
