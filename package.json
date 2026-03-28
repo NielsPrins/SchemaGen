@@ -1,6 +1,6 @@
 {
   "name": "erd-schema-gen",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A TypeScript CLI starter for SchemaGen.",
   "license": "MIT",
   "type": "commonjs",
