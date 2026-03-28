@@ -18,10 +18,14 @@
     "README.md"
   ],
   "keywords": [
-    "cli",
-    "typescript",
-    "schema"
+    "schema gen",
+    "schemagen",
+    "ERD schema gen"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NielsPrins/SchemaGen"
+  },
   "engines": {
     "node": ">=18"
   },
