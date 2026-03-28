@@ -1,6 +1,6 @@
 {
-  "name": "schemagen",
-  "version": "0.1.0",
+  "name": "@nielsprins/schemagen",
+  "version": "1.0.1",
   "description": "A TypeScript CLI starter for SchemaGen.",
   "license": "MIT",
   "type": "commonjs",
