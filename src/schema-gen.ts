@@ -22,18 +22,19 @@ export class SchemaGen {
   }
 
   async start(): Promise<void> {
-    console.log(chalk.cyan("--- ", chalk.underline.bgBlue("SchemaGen") + " ---"));
+    console.log(chalk.cyan("--- ", chalk.yellow.bgBlue("SchemaGen") + " ---"));
     console.log(chalk.cyan("Starting schema generation..."));
 
     const schemaDiscovery = new SchemaDiscovery(this.config.openAiKey);
     const files = await schemaDiscovery.discover(this.config.directory);
+
     const contentOfFiles = schemaDiscovery.readFiles(files);
 
     const plantUML = new PlantUML(this.config.openAiKey);
     const plantUmlDefinition = await plantUML.generate(contentOfFiles);
 
     const parsePlantUml = new ParsePlantUml(plantUmlDefinition, this.config.outputDirectory);
-    const filePath = parsePlantUml.save(this.config.fileType);
+    const filePath = await parsePlantUml.save(this.config.fileType);
 
     console.log(``);
     console.log(chalk.green(`✔ Successfully generated a ERD schema`));

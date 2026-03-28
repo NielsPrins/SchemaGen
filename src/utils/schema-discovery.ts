@@ -73,7 +73,7 @@ export class SchemaDiscovery extends OpenAiProvider {
       ].join("\n"),
       output: Output.object({
         name: "files",
-        description: "an array of files that define the schema",
+        description: "An array of files that define the schema",
         schema: z.object({
           files: z.array(z.string()),
         }),
@@ -94,6 +94,7 @@ export class SchemaDiscovery extends OpenAiProvider {
     const entries = readdirSync(target, { withFileTypes: true }).filter(
       (entry) => !entry.isDirectory() || !ignored.includes(entry.name),
     );
+
     entries.forEach((entry, index) => {
       const isLast = index === entries.length - 1;
       const branch = isLast ? "└── " : "├── ";
