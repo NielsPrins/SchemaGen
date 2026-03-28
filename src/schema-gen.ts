@@ -1,13 +1,16 @@
-import plantumlEncoder from "plantuml-encoder";
+import plantumlEncoder, { encode } from "plantuml-encoder";
 import { ParsePlantUml } from "./utils/parse-plant-uml";
 import chalk from "chalk";
 import ora from "ora";
 import { SchemaDiscovery } from "./utils/schema-discovery";
+import { PlantUmlFormatType } from "./lib/definitions";
+import { PlantUML } from "./utils/plantuml";
 
 interface SchemaGenConfig {
   openAiKey: string;
   directory: string;
   outputDirectory: string;
+  fileType: PlantUmlFormatType;
 }
 
 export class SchemaGen {
@@ -18,24 +21,23 @@ export class SchemaGen {
     this.config = config;
   }
 
-  start() {
+  async start(): Promise<void> {
+    console.log(chalk.cyan("--- ", chalk.underline.bgBlue("SchemaGen") + " ---"));
     console.log(chalk.cyan("Starting schema generation..."));
 
-    const schemaDiscovery = new SchemaDiscovery();
+    const schemaDiscovery = new SchemaDiscovery(this.config.openAiKey);
+    const files = await schemaDiscovery.discover(this.config.directory);
+    const contentOfFiles = schemaDiscovery.readFiles(files);
 
-    // Search repo with OpenAI (PrismaJs, TypeORM, Laravel Eloquent or XML files.)
-    // read the docs for information on propper PlantUML syntax
-    // Create Plantuml diagram
-    // Retrieve svg from PlantUml
-    // Save to temp folder
-    // Show to the user
+    const plantUML = new PlantUML(this.config.openAiKey);
+    const plantUmlDefinition = await plantUML.generate(contentOfFiles);
 
-    // @TODO fill with plantUml
-    const somePlantUml = "A -> B: Hello";
+    const parsePlantUml = new ParsePlantUml(plantUmlDefinition, this.config.outputDirectory);
+    const filePath = parsePlantUml.save(this.config.fileType);
 
-    const parsePlantUml = new ParsePlantUml(somePlantUml, this.config.outputDirectory);
-    const svgPath = parsePlantUml.saveAsSvg();
-    console.log(chalk.green(`Saved as SVG: ${svgPath}`));
+    console.log(``);
+    console.log(chalk.green(`✔ Successfully generated a ERD schema`));
+    console.log(chalk.green(`Diagram is saved as ${this.config.fileType}: ${filePath}`));
   }
 }
 

@@ -1,9 +1,8 @@
 import plantumlEncoder from "plantuml-encoder";
 import fs from "fs";
-import path from "path";
 import chalk from "chalk";
-
-type PlantUmlFormatType = "svg" | "png";
+import { PlantUmlFormatType } from "../lib/definitions";
+import ora from "ora";
 
 export class ParsePlantUml {
   constructor(
@@ -11,16 +10,15 @@ export class ParsePlantUml {
     private outputPath: string,
   ) {}
 
-  public async saveAsSvg(): Promise<string> {
-    const type = "svg";
-    const plantUmlUrl = this.getPlantUmlUrl(type);
-    return await this.downloadFile(plantUmlUrl, type);
-  }
+  public async save(type: PlantUmlFormatType): Promise<string> {
+    const progressionSpinner = ora(chalk.cyan("Parsing  ERD diagram")).start();
 
-  public async saveAsPng(): Promise<string> {
-    const type = "png";
     const plantUmlUrl = this.getPlantUmlUrl(type);
-    return await this.downloadFile(plantUmlUrl, type);
+    progressionSpinner.text = chalk.blue("Downloading ERD diagram");
+
+    const filePath = await this.downloadFile(plantUmlUrl, type);
+    progressionSpinner.succeed("Retrieved ERD diagram");
+    return filePath;
   }
 
   private getPlantUmlUrl(type: PlantUmlFormatType): string {
@@ -28,10 +26,14 @@ export class ParsePlantUml {
     return `https://www.plantuml.com/plantuml/${type}/${encoded}`;
   }
 
-  private async downloadFile(url: string, type: PlantUmlFormatType): Promise<string> {
+  private async downloadFile(
+    url: string,
+    type: PlantUmlFormatType,
+  ): Promise<string> {
     let outputPath = this.outputPath;
 
-    const hasFilePath = outputPath.endsWith(".svg") || outputPath.endsWith(".png");
+    const hasFilePath =
+      outputPath.endsWith(".svg") || outputPath.endsWith(".png");
     if (!hasFilePath) {
       outputPath = `${outputPath}/ERD_diagram.${type}`;
 
@@ -42,7 +44,9 @@ export class ParsePlantUml {
     const response = await fetch(url);
 
     if (!response.ok || !response.body) {
-      console.log(chalk.red("Unable to retrieve file, check your internet connection"));
+      console.log(
+        chalk.red("Unable to retrieve file, check your internet connection"),
+      );
       throw new Error(`Failed to get '${url}' (${response.status})`);
     }
 
@@ -53,5 +57,4 @@ export class ParsePlantUml {
 
     return outputPath;
   }
-
 }

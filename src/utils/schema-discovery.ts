@@ -2,9 +2,10 @@ import { readdirSync, statSync } from "node:fs";
 import { basename, resolve } from "node:path";
 import { generateText, Output } from "ai";
 import { z } from "zod";
-import { createOpenAI } from "@ai-sdk/openai";
 
 import ora from "ora";
+import fs from "fs";
+import { OpenAiProvider } from "../lib/open-api-port";
 
 const ignored = [
   "node_modules",
@@ -17,32 +18,37 @@ const ignored = [
   "logs",
 ];
 
-export class SchemaDiscovery {
-  static async discover(key: string, path?: string) {
-    const loader = ora("Building tree").start();
+export class SchemaDiscovery extends OpenAiProvider {
+  constructor(openApiKey: string) {
+    super(openApiKey);
+  }
 
-    const root = path ? resolve(process.cwd(), path) : process.cwd();
-    const tree = this.buildTree(root);
+  public async discover(path: string) {
+    const loader = ora("Building working tree").start();
+
+    const tree = this.buildTree(path);
+
+    loader.text = "Looking up files";
 
     try {
-      const { output } = await this.lookup(tree, key);
+      const { output } = await this.lookup(tree);
 
       loader.succeed();
 
       return output.files;
     } catch (e) {
-      console.error(e);
       loader.fail();
+      throw new Error("Failed to lookup files", { cause: e });
     }
   }
 
-  private static lookup(tree: string, key: string) {
-    const openai = createOpenAI({
-      apiKey: key,
-    });
+  public readFiles(files: string[]): string[] {
+    return files.map((file) => fs.readFileSync(file, "utf-8"));
+  }
 
+  private lookup(tree: string) {
     return generateText({
-      model: openai("gpt-5.4-nano"),
+      model: this.openAi("gpt-5.4-nano"),
       system: [
         "You are a codebase analysis assistant.",
         "Your job is to identify files that define the database schema.",
@@ -75,7 +81,7 @@ export class SchemaDiscovery {
     });
   }
 
-  private static buildTree(target: string, prefix = ""): string {
+  private buildTree(target: string, prefix = ""): string {
     const stats = statSync(target);
     const name = basename(target);
 
