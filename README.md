@@ -98,10 +98,10 @@ node node_modules/.bin/schemagen --dir examples/drizzle-orm --editor
 
 ## How It Works
 
-1. Builds a simplified tree of the target directory and skips noisy folders such as `node_modules`, `.git`, `.idea`, `.vscode`, `dist`, `build`, `out`, and `logs`.
+1. Builds a simplified tree of the target directory.
 2. Uses `gpt-5.4-nano` to identify which files directly define the schema.
 3. Reads those files and asks `gpt-5.4-nano` to produce valid PlantUML.
-4. Uses the markdown docs in [`docs/`](assets/docs) to verify PlantUML syntax before generating the diagram.
+4. Uses the markdown docs in [`assets/docs/`](assets/docs) to verify PlantUML syntax before generating the diagram.
 5. Either opens the PlantUML editor or renders the final diagram through PlantUML and saves it locally.
 
 ## What It Works Well With
@@ -122,23 +122,9 @@ node node_modules/.bin/schemagen --dir examples/drizzle-orm --editor
 Useful commands:
 
 ```bash
-pnpm dev
-pnpm build
-pnpm start -- --dir examples/prisma
-```
-
-Notes:
-
-- `pnpm dev` compiles the project and runs the CLI against `examples/drizzle-orm` with `--editor`.
-- The PlantUML reference material used by the generator lives in [`docs/`](assets/docs).
-
-## Publish to npm
-
-```bash
-npm login
-npm publish --access public
+npm install
+npm run dev
 ```
 
 ## License
-
 MIT
