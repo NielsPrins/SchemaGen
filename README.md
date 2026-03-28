@@ -9,7 +9,7 @@ It is aimed at database-schema-heavy codebases. The CLI scans a target directory
 - saves a rendered `svg` or `png`
 - opens the generated diagram in the PlantUML web editor
 
-![Example ERD](https://raw.githubusercontent.com/NielsPrins/SchemaGen/main/ERD_diagram.svg)
+![Example ERD](https://raw.githubusercontent.com/NielsPrins/SchemaGen/refs/heads/main/assets/images/sample_diagram.svg)
 
 ## Installation
 
