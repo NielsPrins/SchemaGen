@@ -1,8 +1,8 @@
-import { Command } from "commander";
-import { SchemaGen } from "./schema-gen";
+import {Command} from "commander";
+import {SchemaGen} from "./schema-gen";
 import * as dotenv from "dotenv";
 import chalk from "chalk";
-import { PlantUmlFormatType, plantUmlFormatTypes } from "./lib/definitions";
+import {PlantUmlFormatType, plantUmlFormatTypes} from "./lib/definitions";
 
 console.clear();
 
@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name("schemagen")
   .description("Generate an ERD based on your database schema")
-  .version("0.1.0");
+    .version("1.0.1");
 
 program
   .option("--open-ai-key <string>", "Your OpenAI API key")
