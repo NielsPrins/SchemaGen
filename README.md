@@ -1,6 +1,6 @@
 # SchemaGen
 
-[Npm Package](https://www.npmjs.com/package/erd-schema-gen/)
+<a href="https://npm.im/erd-schema-gen"><img src="https://badgen.net/npm/v/erd-schema-gen"></a>
 
 SchemaGen is a TypeScript CLI that turns schema source files into a diagram using OpenAI and PlantUML.
 
@@ -16,7 +16,7 @@ It is aimed at database-schema-heavy codebases. The CLI scans a target directory
 Install the package via npm:
 
 ```
-    npm install erd-schema-gen
+npm install erd-schema-gen
 ```
 
 Run the generator using:
