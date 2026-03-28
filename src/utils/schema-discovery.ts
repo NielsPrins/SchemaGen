@@ -1,11 +1,11 @@
-import { readdirSync, statSync } from "node:fs";
-import { basename, resolve, dirname } from "node:path";
-import { generateText, Output } from "ai";
-import { z } from "zod";
+import {readdirSync, statSync} from "node:fs";
+import {basename, dirname, resolve} from "node:path";
+import {generateText, Output} from "ai";
+import {z} from "zod";
 
 import ora from "ora";
 import fs from "fs";
-import { OpenAiProvider } from "../lib/open-api-port";
+import {OpenAiProvider} from "../lib/open-api-port";
 
 const ignored = [
   "node_modules",
@@ -19,8 +19,8 @@ const ignored = [
 ];
 
 export class SchemaDiscovery extends OpenAiProvider {
-  constructor(openApiKey: string) {
-    super(openApiKey);
+  constructor(openAiKey: string) {
+    super(openAiKey);
   }
 
   public async discover(path: string) {

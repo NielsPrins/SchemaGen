@@ -4,8 +4,8 @@ import ora from "ora";
 import {readPlantUmlDocsTool} from "../tools/read-docs";
 
 export class PlantUML extends OpenAiProvider {
-  constructor(openApiKey: string) {
-    super(openApiKey);
+    constructor(openAiKey: string) {
+        super(openAiKey);
   }
 
   public async generate(content: string[]): Promise<string> {

@@ -4,8 +4,6 @@ import * as dotenv from "dotenv";
 import chalk from "chalk";
 import {PlantUmlFormatType, plantUmlFormatTypes} from "./lib/definitions";
 
-console.clear();
-
 const program = new Command();
 
 program
@@ -19,7 +17,7 @@ program
   .option("--output <string>", "The path to the output directory")
   .option("--type <string>", "Either 'svg' or 'png' (default: svg)", "svg")
   .option("--editor", "Open the generated diagram in the web editor")
-  .action((args) => {
+    .action(async (args) => {
     let openAiKey: string | undefined = args["open-ai-key"];
     let directory: string | undefined = args["dir"];
     let outputDirectory: string | undefined = args["output"];
@@ -57,14 +55,18 @@ program
     }
 
     const schemaGen = new SchemaGen({
-      openAiKey: openAiKey,
-      directory: directory,
-      outputDirectory: outputDirectory,
+        openAiKey,
+        directory,
+        outputDirectory,
       fileType: fileType as PlantUmlFormatType,
       editor: args.editor,
     });
 
-    schemaGen.start();
+        await schemaGen.start();
   });
 
-program.parse();
+program.parseAsync().catch((e: unknown) => {
+    const message = e instanceof Error ? e.message : "Schema generation failed";
+    console.error(chalk.red(message));
+    process.exitCode = 1;
+});

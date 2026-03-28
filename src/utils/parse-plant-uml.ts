@@ -1,7 +1,8 @@
 import plantumlEncoder from "plantuml-encoder";
-import fs from "fs";
+import {mkdirSync, writeFileSync} from "node:fs";
+import {dirname} from "node:path";
 import chalk from "chalk";
-import { PlantUmlFormatType } from "../lib/definitions";
+import {PlantUmlFormatType} from "../lib/definitions";
 import ora from "ora";
 
 export class ParsePlantUml {
@@ -53,7 +54,8 @@ export class ParsePlantUml {
     const arrayBuffer = await response.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
 
-    fs.writeFileSync(outputPath, buffer);
+    mkdirSync(dirname(outputPath), {recursive: true});
+    writeFileSync(outputPath, buffer);
 
     return outputPath;
   }

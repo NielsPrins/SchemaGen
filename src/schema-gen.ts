@@ -1,11 +1,10 @@
-import { ParsePlantUml } from "./utils/parse-plant-uml";
+import {ParsePlantUml} from "./utils/parse-plant-uml";
 import chalk from "chalk";
-import { SchemaDiscovery } from "./utils/schema-discovery";
-import { PlantUmlFormatType } from "./lib/definitions";
-import { PlantUML } from "./utils/plantuml";
+import {SchemaDiscovery} from "./utils/schema-discovery";
+import {PlantUmlFormatType} from "./lib/definitions";
+import {PlantUML} from "./utils/plantuml";
 import plantumlEncoder from "plantuml-encoder";
 import open from "open";
-
 
 interface SchemaGenConfig {
   openAiKey: string;
@@ -28,6 +27,9 @@ export class SchemaGen {
 
     const schemaDiscovery = new SchemaDiscovery(this.config.openAiKey);
     const files = await schemaDiscovery.discover(this.config.directory);
+    if (files.length === 0) {
+      throw new Error("No schema files were identified in the selected directory");
+    }
 
     const contentOfFiles = schemaDiscovery.readFiles(files);
 
@@ -43,10 +45,10 @@ export class SchemaGen {
 
     if (this.config.editor) {
       const url = `https://editor.plantuml.com/uml/${plantumlEncoder.encode(plantUmlDefinition)}`;
-      open( url);
+      await open(url);
     } else {
       const filePath = await parsePlantUml.save(this.config.fileType);
-      open(filePath);
+      await open(filePath);
 
       console.log(chalk.green(`Diagram is saved as ${this.config.fileType}: ${filePath}`));
     }
