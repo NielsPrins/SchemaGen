@@ -11,7 +11,7 @@ const program = new Command();
 program
   .name("schemagen")
   .description("Generate an ERD based on your database schema")
-    .version("1.0.1");
+    .version("1.0.2");
 
 program
   .option("--open-ai-key <string>", "Your OpenAI API key")
